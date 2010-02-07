@@ -61,7 +61,7 @@ module Rails
       initializer 'data_mapper.setup_identity_map' do |app|
         if app.config.data_mapper.use_identity_map
           require 'rails3_datamapper/middleware/identity_map'
-          app.config.middleware.use Middleware::IdentityMap
+          app.config.middleware.use Rails::DataMapper::Middleware::IdentityMap
         end
       end
 
@@ -72,7 +72,7 @@ module Rails
       # Expose database runtime to controller for logging.
       initializer "data_mapper.log_runtime" do |app|
         require "rails3_datamapper/railties/controller_runtime"
-        ActionController::Base.send :include, Railties::ControllerRuntime
+        ActionController::Base.send :include, Rails::DataMapper::Railties::ControllerRuntime
       end
 
 
